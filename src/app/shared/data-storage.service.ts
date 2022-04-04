@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { RecipeService } from "../recipes/recipe.service";
+import { Recipe } from "../recipes/recipe.model";
+import { map, tap } from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -16,5 +18,19 @@ export class DataStorageService {
             .subscribe(response => {
                 console.log(response);
             });
+    }
+
+    fetchRecipes() {
+        return this.http.get<Recipe[]>('https://cook-like-a-pro-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json')
+            .pipe(map(recipes => {
+                return recipes.map(recipe => {
+                    return {...recipe, 
+                            ingredients: recipe.ingredients? recipe.ingredients : []};
+                    });
+                }),
+                tap(response => {
+                    this.recipeService.setRecipes(response);
+                })
+            );
     }
 }

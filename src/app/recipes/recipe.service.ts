@@ -8,24 +8,31 @@ import { Recipe } from "./recipe.model";
 export class RecipeService {
     recipesChanged = new Subject<Recipe[]>();
     
-    private recipes: Recipe[] = [
-        new Recipe('A Sandwich', 
-        'A Vegetarian vegatabe and paneer sandwich', 
-        'https://www.mashed.com/img/gallery/chain-sandwich-shops-ranked-from-worst-to-best/intro-1625663662.webp',
-        [
-            new Ingredient('Meat', 1),
-            new Ingredient('French Fries', 20),
-        ]),
-        new Recipe('Another Sandwich', 
-        'A Vegetarian vegatabe and paneer sandwich', 
-        'https://www.mashed.com/img/gallery/chain-sandwich-shops-ranked-from-worst-to-best/intro-1625663662.webp',
-        [
-            new Ingredient('Buns', 2),
-            new Ingredient('Meat', 1),
-        ])
-    ];
+ //   private recipes: Recipe[] = [
+ //      new Recipe('A Sandwich', 
+ //       'A Vegetarian vegatabe and paneer sandwich', 
+ //       'https://www.mashed.com/img/gallery/chain-sandwich-shops-ranked-from-worst-to-best/intro-1625663662.webp',
+ //       [
+ //           new Ingredient('Meat', 1),
+ //           new Ingredient('French Fries', 20),
+ //       ]),
+ //       new Recipe('Another Sandwich', 
+ //       'A Vegetarian vegatabe and paneer sandwich', 
+ //       'https://www.mashed.com/img/gallery/chain-sandwich-shops-ranked-from-worst-to-best/intro-1625663662.webp',
+ //       [
+ //           new Ingredient('Buns', 2),
+ //           new Ingredient('Meat', 1),
+ //       ])
+ //   ];
+
+    private recipes: Recipe[] = [];
 
     constructor(private slService: ShoppingListService) {}
+
+    setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes;
+        this.recipesChanged.next(this.recipes.slice());
+    }
 
     getRecipes() {
         return this.recipes.slice();
