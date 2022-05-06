@@ -29,5 +29,3 @@ export class AuthInterceptorService {
     }
 }
 
-// Username: mayank.gupta@monkhub.com
-// Password: =rW2ruR<
