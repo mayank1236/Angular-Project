@@ -1,4 +1,6 @@
 # CookLikeAPro
+Hosted on Firebase: 
+https://cook-like-a-pro.web.app/auth
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
 
